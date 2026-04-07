@@ -45,6 +45,7 @@ def train(
     eval_every: int = 10,
     patience: int = 20,
     device_name: str = "auto",
+    use_synthetic: int = 0,
 ):
     """Train the OMR model."""
     # Device
@@ -71,6 +72,7 @@ def train(
         "train", vocab,
         img_height=img_height, img_width=img_width,
         max_seq_len=max_seq_len, augment=True,
+        use_synthetic=bool(use_synthetic),
     )
     dev_ds = OMRDataset(
         "dev", vocab,
@@ -205,6 +207,111 @@ def train(
                 print(f"  Epoch {epoch:3d}/{epochs}  train_loss={avg_train_loss:.4f}")
 
     print(f"\nBest dev loss: {best_dev_loss:.4f} at epoch {best_epoch}")
+
+    # Stage 2: Fine-tune on real data only (if trained with synthetic)
+    if use_synthetic:
+        print(f"\n--- Stage 2: Fine-tuning on real data only ---")
+        real_ds = OMRDataset(
+            "train", vocab,
+            img_height=img_height, img_width=img_width,
+            max_seq_len=max_seq_len, augment=True,
+            use_synthetic=False,
+        )
+        real_loader = DataLoader(
+            real_ds, batch_size=max(1, batch_size // 2), shuffle=True,
+            collate_fn=collate_fn, num_workers=0,
+        )
+        print(f"  Real train samples: {len(real_ds)}")
+
+        # Load best pretrained checkpoint
+        checkpoint = torch.load(
+            os.path.join(CHECKPOINTS_DIR, "best.pt"),
+            map_location=device,
+            weights_only=True,
+        )
+        model.load_state_dict(checkpoint["model_state_dict"])
+
+        ft_optimizer = torch.optim.AdamW(model.parameters(), lr=lr * 0.1, weight_decay=0.01)
+        ft_epochs = min(30, epochs // 2)
+        ft_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(ft_optimizer, T_max=ft_epochs)
+
+        ft_best_dev_loss = best_dev_loss
+        ft_best_epoch = 0
+        ft_no_improve = 0
+
+        for epoch in range(1, ft_epochs + 1):
+            model.train()
+            ft_train_loss = 0
+            ft_train_tokens = 0
+
+            for imgs, tokens, lengths in real_loader:
+                imgs = imgs.to(device)
+                tokens = tokens.to(device)
+                tgt_input = tokens[:, :-1]
+                tgt_output = tokens[:, 1:]
+
+                logits = model(imgs, tgt_input)
+                loss = criterion(
+                    logits.reshape(-1, vocab.size),
+                    tgt_output.reshape(-1),
+                )
+
+                ft_optimizer.zero_grad()
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                ft_optimizer.step()
+
+                ft_train_loss += loss.item() * tgt_output.numel()
+                ft_train_tokens += (tgt_output != vocab.pad_idx).sum().item()
+
+            ft_scheduler.step()
+
+            if epoch % 5 == 0 or epoch == 1:
+                model.eval()
+                dev_loss = 0
+                dev_tokens = 0
+                with torch.no_grad():
+                    for imgs, tokens, lengths in dev_loader:
+                        imgs = imgs.to(device)
+                        tokens = tokens.to(device)
+                        tgt_input = tokens[:, :-1]
+                        tgt_output = tokens[:, 1:]
+                        logits = model(imgs, tgt_input)
+                        loss = criterion(
+                            logits.reshape(-1, vocab.size),
+                            tgt_output.reshape(-1),
+                        )
+                        dev_loss += loss.item() * tgt_output.numel()
+                        dev_tokens += (tgt_output != vocab.pad_idx).sum().item()
+
+                avg_ft_dev = dev_loss / max(dev_tokens, 1)
+                avg_ft_train = ft_train_loss / max(ft_train_tokens, 1)
+                print(f"  FT Epoch {epoch:3d}/{ft_epochs}  "
+                      f"train_loss={avg_ft_train:.4f}  "
+                      f"dev_loss={avg_ft_dev:.4f}")
+
+                if avg_ft_dev < ft_best_dev_loss:
+                    ft_best_dev_loss = avg_ft_dev
+                    ft_best_epoch = epoch
+                    ft_no_improve = 0
+                    torch.save({
+                        "epoch": best_epoch + epoch,
+                        "model_state_dict": model.state_dict(),
+                        "optimizer_state_dict": ft_optimizer.state_dict(),
+                        "dev_loss": avg_ft_dev,
+                        "vocab_size": vocab.size,
+                        "config": checkpoint.get("config", {}),
+                    }, os.path.join(CHECKPOINTS_DIR, "best.pt"))
+                else:
+                    ft_no_improve += 1
+
+                if ft_no_improve >= 4:
+                    print(f"  FT early stop at epoch {epoch} (best: {ft_best_epoch})")
+                    break
+
+        best_dev_loss = ft_best_dev_loss
+        best_epoch = best_epoch + ft_best_epoch
+        print(f"  FT best dev loss: {ft_best_dev_loss:.4f} at FT epoch {ft_best_epoch}")
 
     # Generate predictions on dev set with best model
     print("\nGenerating dev predictions with best model...")

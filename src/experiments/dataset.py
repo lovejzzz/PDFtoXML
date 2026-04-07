@@ -89,10 +89,14 @@ def build_vocabulary(events_dir: str = EVENTS_DIR) -> Vocabulary:
     return vocab
 
 
+SYNTH_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data", "synthetic")
+
+
 class OMRDataset(Dataset):
     """Dataset for OMR training.
 
     Each sample: (image_tensor, token_indices, token_length)
+    Supports both real page images and synthetic rendered images.
     """
 
     def __init__(
@@ -103,6 +107,7 @@ class OMRDataset(Dataset):
         img_width: int = 384,
         max_seq_len: int = 1400,
         augment: bool = False,
+        use_synthetic: bool = False,
     ):
         self.vocab = vocab
         self.img_height = img_height
@@ -122,15 +127,14 @@ class OMRDataset(Dataset):
 
         # Filter to this split
         self.samples = []
-        for file_id, s in sorted(all_splits.items()):
-            if s != split:
-                continue
+        split_ids = {fid for fid, s in all_splits.items() if s == split}
 
+        # Real page images
+        for file_id in sorted(split_ids):
             token_path = os.path.join(EVENTS_DIR, f"{file_id}.tokens")
             if not os.path.exists(token_path):
                 continue
 
-            # Get first page for this tune
             if file_id in page_map:
                 first_page_idx = page_map[file_id]["page_indices"][0]
             else:
@@ -147,7 +151,34 @@ class OMRDataset(Dataset):
                 "file_id": file_id,
                 "page_path": page_path,
                 "tokens": tokens,
+                "provenance": "real",
             })
+
+        # Synthetic images (train split only)
+        if use_synthetic and split == "train":
+            synth_manifest_path = os.path.join(SYNTH_DIR, "manifest.json")
+            if os.path.exists(synth_manifest_path):
+                with open(synth_manifest_path) as f:
+                    synth_manifest = json.load(f)
+
+                for entry in synth_manifest:
+                    source_id = entry["source_id"]
+                    if source_id not in split_ids:
+                        continue
+                    if not os.path.exists(entry["image_path"]):
+                        continue
+                    if not os.path.exists(entry["token_path"]):
+                        continue
+
+                    with open(entry["token_path"]) as f:
+                        tokens = f.read().strip().split()
+
+                    self.samples.append({
+                        "file_id": entry["id"],
+                        "page_path": entry["image_path"],
+                        "tokens": tokens,
+                        "provenance": "synthetic",
+                    })
 
     def __len__(self):
         return len(self.samples)
