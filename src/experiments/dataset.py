@@ -131,7 +131,7 @@ class OMRDataset(Dataset):
         self.samples = []
         split_ids = {fid for fid, s in all_splits.items() if s == split}
 
-        # Real page images — use ALL pages from multi-page tunes
+        # Real page images — first page of each tune
         for file_id in sorted(split_ids):
             token_path = os.path.join(EVENTS_DIR, f"{file_id}.tokens")
             if not os.path.exists(token_path):
@@ -140,22 +140,20 @@ class OMRDataset(Dataset):
             if file_id not in page_map:
                 continue
 
+            first_page_idx = page_map[file_id]["page_indices"][0]
+            page_path = os.path.join(PAGES_DIR, f"page_{first_page_idx + 1:03d}.png")
+            if not os.path.exists(page_path):
+                continue
+
             with open(token_path) as f:
                 tokens = f.read().strip().split()
 
-            page_indices = page_map[file_id]["page_indices"]
-            for pi, page_idx in enumerate(page_indices):
-                page_path = os.path.join(PAGES_DIR, f"page_{page_idx + 1:03d}.png")
-                if not os.path.exists(page_path):
-                    continue
-
-                sample_id = f"{file_id}_p{pi}" if pi > 0 else file_id
-                self.samples.append({
-                    "file_id": sample_id,
-                    "page_path": page_path,
-                    "tokens": tokens,  # full sequence for all pages
-                    "provenance": "real",
-                })
+            self.samples.append({
+                "file_id": file_id,
+                "page_path": page_path,
+                "tokens": tokens,
+                "provenance": "real",
+            })
 
         # Synthetic images (train split only)
         if use_synthetic and split == "train":
@@ -220,7 +218,12 @@ class OMRDataset(Dataset):
         img = Image.open(sample["page_path"]).convert("L")  # grayscale
 
         if self.augment:
-            img = self._augment(img)
+            # Use scan-like augmentation for synthetic images to bridge domain gap
+            if sample.get("provenance") == "synthetic" and random.random() < 0.7:
+                from src.experiments.scan_augment import scan_augment
+                img = scan_augment(img)
+            else:
+                img = self._augment(img)
 
         # Resize preserving aspect ratio, pad to fixed size
         img = self._resize_pad(img)
