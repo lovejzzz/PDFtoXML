@@ -1,0 +1,37 @@
+{
+  "experiments": [
+    {
+      "name": "lr_3e4",
+      "description": "Higher learning rate 3e-4",
+      "score": 0.0,
+      "event_f1": 0.0,
+      "pitch_acc": 0.0,
+      "rhythm_acc": 0.0,
+      "improvement": -0.1797,
+      "status": "crash",
+      "elapsed_seconds": 1132,
+      "best_before": 0.1797,
+      "returncode": 1,
+      "config": {
+        "name": "lr_3e4",
+        "description": "Higher learning rate 3e-4",
+        "epochs": 40,
+        "batch_size": 4,
+        "lr": 0.0003,
+        "d_model": 256,
+        "nhead": 4,
+        "num_layers": 4,
+        "dim_ff": 512,
+        "dropout": 0.1,
+        "img_height": 512,
+        "img_width": 384,
+        "max_seq_len": 1400,
+        "eval_every": 5,
+        "patience": 20,
+        "use_synthetic": 1,
+        "label_smoothing": 0.0,
+        "warmup_steps": 0
+      }
+    }
+  ]
+}

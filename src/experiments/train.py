@@ -46,6 +46,8 @@ def train(
     patience: int = 20,
     device_name: str = "auto",
     use_synthetic: int = 0,
+    label_smoothing: float = 0.0,
+    warmup_steps: int = 0,
 ):
     """Train the OMR model."""
     # Device
@@ -108,7 +110,10 @@ def train(
     # Training setup
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
-    criterion = nn.CrossEntropyLoss(ignore_index=vocab.pad_idx)
+    criterion = nn.CrossEntropyLoss(
+        ignore_index=vocab.pad_idx,
+        label_smoothing=label_smoothing,
+    )
 
     os.makedirs(CHECKPOINTS_DIR, exist_ok=True)
 
