@@ -90,13 +90,14 @@ def build_vocabulary(events_dir: str = EVENTS_DIR) -> Vocabulary:
 
 
 SYNTH_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data", "synthetic")
+PSEUDO_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "data", "pseudo_labels")
 
 
 class OMRDataset(Dataset):
     """Dataset for OMR training.
 
     Each sample: (image_tensor, token_indices, token_length)
-    Supports both real page images and synthetic rendered images.
+    Supports real page images, synthetic rendered images, and pseudo-labels.
     """
 
     def __init__(
@@ -108,6 +109,7 @@ class OMRDataset(Dataset):
         max_seq_len: int = 1400,
         augment: bool = False,
         use_synthetic: bool = False,
+        use_pseudo: bool = False,
     ):
         self.vocab = vocab
         self.img_height = img_height
@@ -129,30 +131,31 @@ class OMRDataset(Dataset):
         self.samples = []
         split_ids = {fid for fid, s in all_splits.items() if s == split}
 
-        # Real page images
+        # Real page images — use ALL pages from multi-page tunes
         for file_id in sorted(split_ids):
             token_path = os.path.join(EVENTS_DIR, f"{file_id}.tokens")
             if not os.path.exists(token_path):
                 continue
 
-            if file_id in page_map:
-                first_page_idx = page_map[file_id]["page_indices"][0]
-            else:
-                continue
-
-            page_path = os.path.join(PAGES_DIR, f"page_{first_page_idx + 1:03d}.png")
-            if not os.path.exists(page_path):
+            if file_id not in page_map:
                 continue
 
             with open(token_path) as f:
                 tokens = f.read().strip().split()
 
-            self.samples.append({
-                "file_id": file_id,
-                "page_path": page_path,
-                "tokens": tokens,
-                "provenance": "real",
-            })
+            page_indices = page_map[file_id]["page_indices"]
+            for pi, page_idx in enumerate(page_indices):
+                page_path = os.path.join(PAGES_DIR, f"page_{page_idx + 1:03d}.png")
+                if not os.path.exists(page_path):
+                    continue
+
+                sample_id = f"{file_id}_p{pi}" if pi > 0 else file_id
+                self.samples.append({
+                    "file_id": sample_id,
+                    "page_path": page_path,
+                    "tokens": tokens,  # full sequence for all pages
+                    "provenance": "real",
+                })
 
         # Synthetic images (train split only)
         if use_synthetic and split == "train":
@@ -179,6 +182,33 @@ class OMRDataset(Dataset):
                         "tokens": tokens,
                         "provenance": "synthetic",
                     })
+
+        # Pseudo-labeled pages (train split only)
+        if use_pseudo and split == "train":
+            pseudo_summary = os.path.join(PSEUDO_DIR, "_summary.json")
+            if os.path.exists(pseudo_summary):
+                for token_file in sorted(Path(PSEUDO_DIR).glob("*.tokens")):
+                    pseudo_id = token_file.stem
+                    # Extract page index from pseudo_id (format: pseudo_page_NNN)
+                    try:
+                        page_num = int(pseudo_id.split("_")[-1])
+                        page_path = os.path.join(PAGES_DIR, f"page_{page_num:03d}.png")
+                    except (ValueError, IndexError):
+                        continue
+
+                    if not os.path.exists(page_path):
+                        continue
+
+                    with open(token_file) as f:
+                        tokens = f.read().strip().split()
+
+                    if tokens:
+                        self.samples.append({
+                            "file_id": pseudo_id,
+                            "page_path": page_path,
+                            "tokens": tokens,
+                            "provenance": "pseudo",
+                        })
 
     def __len__(self):
         return len(self.samples)

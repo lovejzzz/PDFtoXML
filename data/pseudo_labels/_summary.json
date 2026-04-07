@@ -1,0 +1,225 @@
+{
+  "total_unlabeled": 27,
+  "kept": 0,
+  "skipped": 27,
+  "confidence_threshold": 0.2,
+  "checkpoint": "/Users/mengyingli/PDFtoXML/src/experiments/../../checkpoints/best.pt",
+  "results": [
+    {
+      "page_index": 33,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_034.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.0389324869545146,
+      "min_confidence": 0.02263329178094864,
+      "kept": false
+    },
+    {
+      "page_index": 34,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_035.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.04307975806295872,
+      "min_confidence": 0.03909623250365257,
+      "kept": false
+    },
+    {
+      "page_index": 35,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_036.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.038206526449081984,
+      "min_confidence": 0.020660320296883583,
+      "kept": false
+    },
+    {
+      "page_index": 36,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_037.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.03867180671827805,
+      "min_confidence": 0.02087443508207798,
+      "kept": false
+    },
+    {
+      "page_index": 44,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_045.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.033522638181845345,
+      "min_confidence": 0.032859038561582565,
+      "kept": false
+    },
+    {
+      "page_index": 45,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_046.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.038187448952541427,
+      "min_confidence": 0.02112514153122902,
+      "kept": false
+    },
+    {
+      "page_index": 46,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_047.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.05325221391481276,
+      "min_confidence": 0.023445503786206245,
+      "kept": false
+    },
+    {
+      "page_index": 87,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_088.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.046222936997111566,
+      "min_confidence": 0.023205360397696495,
+      "kept": false
+    },
+    {
+      "page_index": 88,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_089.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.03624785505235195,
+      "min_confidence": 0.03312911465764046,
+      "kept": false
+    },
+    {
+      "page_index": 89,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_090.png",
+      "num_tokens": 1,
+      "avg_confidence": 0.0313216894865036,
+      "min_confidence": 0.0313216894865036,
+      "kept": false
+    },
+    {
+      "page_index": 90,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_091.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.03261629119515419,
+      "min_confidence": 0.031648751348257065,
+      "kept": false
+    },
+    {
+      "page_index": 91,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_092.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.044306494295597076,
+      "min_confidence": 0.041155047714710236,
+      "kept": false
+    },
+    {
+      "page_index": 92,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_093.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.04093451518565416,
+      "min_confidence": 0.02685301937162876,
+      "kept": false
+    },
+    {
+      "page_index": 118,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_119.png",
+      "num_tokens": 1,
+      "avg_confidence": 0.03531312569975853,
+      "min_confidence": 0.03531312569975853,
+      "kept": false
+    },
+    {
+      "page_index": 119,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_120.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.04241466894745827,
+      "min_confidence": 0.033163465559482574,
+      "kept": false
+    },
+    {
+      "page_index": 120,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_121.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.0458843025068442,
+      "min_confidence": 0.04062332957983017,
+      "kept": false
+    },
+    {
+      "page_index": 125,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_126.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.03535238997058795,
+      "min_confidence": 0.021779632195830345,
+      "kept": false
+    },
+    {
+      "page_index": 126,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_127.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.04411907307803631,
+      "min_confidence": 0.04061048850417137,
+      "kept": false
+    },
+    {
+      "page_index": 127,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_128.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.04645800217986107,
+      "min_confidence": 0.03925985470414162,
+      "kept": false
+    },
+    {
+      "page_index": 128,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_129.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.040667962903777756,
+      "min_confidence": 0.028946708887815475,
+      "kept": false
+    },
+    {
+      "page_index": 132,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_133.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.040504251711278236,
+      "min_confidence": 0.022269627079367638,
+      "kept": false
+    },
+    {
+      "page_index": 133,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_134.png",
+      "num_tokens": 1399,
+      "avg_confidence": 0.038678970117337626,
+      "min_confidence": 0.0205884650349617,
+      "kept": false
+    },
+    {
+      "page_index": 134,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_135.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.050029012064139046,
+      "min_confidence": 0.040762271732091904,
+      "kept": false
+    },
+    {
+      "page_index": 135,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_136.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.03334675915539265,
+      "min_confidence": 0.030382664874196053,
+      "kept": false
+    },
+    {
+      "page_index": 136,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_137.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.03521143396695455,
+      "min_confidence": 0.03312612324953079,
+      "kept": false
+    },
+    {
+      "page_index": 143,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_144.png",
+      "num_tokens": 3,
+      "avg_confidence": 0.02960159070789814,
+      "min_confidence": 0.02556387148797512,
+      "kept": false
+    },
+    {
+      "page_index": 144,
+      "page_path": "/Users/mengyingli/PDFtoXML/src/experiments/../../data/pages/page_145.png",
+      "num_tokens": 2,
+      "avg_confidence": 0.033797258511185646,
+      "min_confidence": 0.0295652374625206,
+      "kept": false
+    }
+  ]
+}

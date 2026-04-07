@@ -46,6 +46,7 @@ def train(
     patience: int = 20,
     device_name: str = "auto",
     use_synthetic: int = 0,
+    use_pseudo: int = 0,
     label_smoothing: float = 0.0,
     warmup_steps: int = 0,
 ):
@@ -75,6 +76,7 @@ def train(
         img_height=img_height, img_width=img_width,
         max_seq_len=max_seq_len, augment=True,
         use_synthetic=bool(use_synthetic),
+        use_pseudo=bool(use_pseudo),
     )
     dev_ds = OMRDataset(
         "dev", vocab,
