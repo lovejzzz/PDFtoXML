@@ -116,6 +116,8 @@ def train(
     )
 
     os.makedirs(CHECKPOINTS_DIR, exist_ok=True)
+    # Use a run-specific checkpoint to avoid conflicts between experiments
+    run_ckpt_path = os.path.join(CHECKPOINTS_DIR, "current_run.pt")
 
     best_dev_loss = float("inf")
     best_epoch = 0
@@ -200,7 +202,7 @@ def train(
                         "dropout": dropout, "img_height": img_height,
                         "img_width": img_width, "max_seq_len": max_seq_len,
                     },
-                }, os.path.join(CHECKPOINTS_DIR, "best.pt"))
+                }, run_ckpt_path)
             else:
                 no_improve += 1
 
@@ -230,7 +232,7 @@ def train(
 
         # Load best pretrained checkpoint
         checkpoint = torch.load(
-            os.path.join(CHECKPOINTS_DIR, "best.pt"),
+            run_ckpt_path,
             map_location=device,
             weights_only=True,
         )
@@ -306,7 +308,7 @@ def train(
                         "dev_loss": avg_ft_dev,
                         "vocab_size": vocab.size,
                         "config": checkpoint.get("config", {}),
-                    }, os.path.join(CHECKPOINTS_DIR, "best.pt"))
+                    }, run_ckpt_path)
                 else:
                     ft_no_improve += 1
 
@@ -321,7 +323,7 @@ def train(
     # Generate predictions on dev set with best model
     print("\nGenerating dev predictions with best model...")
     checkpoint = torch.load(
-        os.path.join(CHECKPOINTS_DIR, "best.pt"),
+        run_ckpt_path,
         map_location=device,
         weights_only=True,
     )
@@ -364,6 +366,11 @@ def train(
         commit=commit_hash,
         description=f"CNN-Transformer baseline d={d_model} L={num_layers} ep={best_epoch}",
     )
+
+    # Copy run checkpoint to best.pt for downstream use
+    import shutil
+    if os.path.exists(run_ckpt_path):
+        shutil.copy2(run_ckpt_path, os.path.join(CHECKPOINTS_DIR, "best.pt"))
 
 
 if __name__ == "__main__":

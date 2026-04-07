@@ -3,3 +3,8 @@ roundtrip	0.9995	1.0000	1.0000	1.0000	0.9965	1.0000	keep	self-eval sanity check
 1814813	0.1634	0.0202	0.1177	0.1177	0.0293	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=15
 1df8c8d	0.1720	0.0140	0.1468	0.1468	0.0115	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=5
 3d030b6	0.1797	0.0143	0.1591	0.1591	0.0257	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=5
+7adf4e9	0.1588	0.0143	0.0902	0.0902	0.0927	1.0000	keep	CNN-Transformer baseline d=256 L=2 ep=26
+7adf4e9	0.1690	0.0204	0.1318	0.1318	0.0237	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=2
+7adf4e9	0.1722	0.0168	0.1407	0.1407	0.0258	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=6
+7adf4e9	0.1716	0.0107	0.1399	0.1399	0.0366	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=5
+7adf4e9	0.1943	0.0134	0.1779	0.1779	0.0679	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=6
