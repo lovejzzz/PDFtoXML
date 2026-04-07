@@ -116,8 +116,10 @@ def train(
     )
 
     os.makedirs(CHECKPOINTS_DIR, exist_ok=True)
-    # Use a run-specific checkpoint to avoid conflicts between experiments
-    run_ckpt_path = os.path.join(CHECKPOINTS_DIR, "current_run.pt")
+    # Use a unique checkpoint per run (PID-based) to allow parallel experiments
+    import hashlib
+    run_id = f"{os.getpid()}_{int(time.time())}"
+    run_ckpt_path = os.path.join(CHECKPOINTS_DIR, f"run_{run_id}.pt")
 
     best_dev_loss = float("inf")
     best_epoch = 0
@@ -216,7 +218,7 @@ def train(
     print(f"\nBest dev loss: {best_dev_loss:.4f} at epoch {best_epoch}")
 
     # Stage 2: Fine-tune on real data only (if trained with synthetic)
-    if use_synthetic:
+    if use_synthetic and os.path.exists(run_ckpt_path):
         print(f"\n--- Stage 2: Fine-tuning on real data only ---")
         real_ds = OMRDataset(
             "train", vocab,
@@ -367,10 +369,11 @@ def train(
         description=f"CNN-Transformer baseline d={d_model} L={num_layers} ep={best_epoch}",
     )
 
-    # Copy run checkpoint to best.pt for downstream use
+    # Copy run checkpoint to best.pt for downstream use, then clean up
     import shutil
     if os.path.exists(run_ckpt_path):
         shutil.copy2(run_ckpt_path, os.path.join(CHECKPOINTS_DIR, "best.pt"))
+        os.remove(run_ckpt_path)
 
 
 if __name__ == "__main__":
