@@ -6,3 +6,5 @@ __pycache__/
 data/pages/
 outputs/reconstructed_xml/
 data/tune_page_map.json
+checkpoints/
+outputs/predictions/

@@ -1,2 +1,3 @@
 commit	score	event_f1	pitch_acc_global	rhythm_acc_global	measure_validity	xml_parse_rate	status	description
 roundtrip	0.9995	1.0000	1.0000	1.0000	0.9965	1.0000	keep	self-eval sanity check
+1814813	0.1634	0.0202	0.1177	0.1177	0.0293	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=15
