@@ -1,0 +1,13 @@
+{
+  "total_files": 50,
+  "total_notes": 22699,
+  "total_rests": 2825,
+  "total_measures": 3521,
+  "tier2_coverage": {
+    "ties": 1106,
+    "accidentals": 6677,
+    "tuplets": 3103,
+    "chord_symbols": 4464,
+    "dots": 204
+  }
+}

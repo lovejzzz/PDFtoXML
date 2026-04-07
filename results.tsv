@@ -1,0 +1,2 @@
+commit	score	event_f1	pitch_acc_global	rhythm_acc_global	measure_validity	xml_parse_rate	status	description
+roundtrip	0.9995	1.0000	1.0000	1.0000	0.9965	1.0000	keep	self-eval sanity check

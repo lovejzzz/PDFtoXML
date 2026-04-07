@@ -1,0 +1,51 @@
+id,title,xml_path,event_json_path,page_indices,system_indices,crop_bbox,status,match_source,title_match_confidence,num_measures,split
+an_oscar_for_treadwell,An Oscar For Treadwell,data/xml/An_Oscar_For_Treadwell.xml,data/events/an_oscar_for_treadwell.json,"[41, 42, 43]",,,manual_verified,manual,1.00,98,train
+another_hairdo,Another Hairdo,data/xml/Another_Hairdo.xml,data/events/another_hairdo.json,"[105, 106]",,,manual_verified,manual,1.00,61,test
+anthropology,Anthropology,data/xml/Anthropology.xml,data/events/anthropology.json,"[9, 10, 11, 12]",,,manual_verified,manual,1.00,131,dev
+au_private_1,Au Privave (No. 1),data/xml/Au_Private_1.xml,data/events/au_private_1.json,"[23, 24]",,,manual_verified,manual,1.00,61,train
+au_private_2,Au Privave (No. 2),data/xml/Au_Private_2.xml,data/events/au_private_2.json,"[25, 26]",,,manual_verified,manual,1.00,49,train
+back_home_blues,Back Home Blues,data/xml/Back_Home_Blues.xml,data/events/back_home_blues.json,"[107, 108]",,,manual_verified,manual,1.00,62,dev
+barbados,Barbados,data/xml/Barbados.xml,data/events/barbados.json,"[71, 72]",,,manual_verified,manual,1.00,49,test
+billiess_bounce,Billie's Bounce,data/xml/Billies's_Bounce.xml,data/events/billiess_bounce.json,"[81, 82]",,,manual_verified,manual,1.00,74,test
+bird_gets_the_worm,Bird Gets The Worm,data/xml/Bird_Gets_The_Worm.xml,data/events/bird_gets_the_worm.json,"[95, 96, 97]",,,manual_verified,manual,1.00,66,test
+bloomdido,Bloomdido,data/xml/Bloomdido.xml,data/events/bloomdido.json,"[109, 110]",,,manual_verified,manual,1.00,73,train
+blue_bird,Blue Bird,data/xml/Blue_Bird.xml,data/events/blue_bird.json,"[85, 86]",,,manual_verified,manual,1.00,41,train
+blues_for_alice,Blues For Alice,data/xml/Blues_For_Alice.xml,data/events/blues_for_alice.json,"[17, 18]",,,manual_verified,manual,1.00,49,train
+buzzy,Buzzy,data/xml/Buzzy.xml,data/events/buzzy.json,"[79, 80]",,,manual_verified,manual,1.00,49,train
+card_board,Card Board,data/xml/Card_Board.xml,data/events/card_board.json,"[93, 94]",,,manual_verified,manual,1.00,66,train
+celerity,Celerity,data/xml/Celerity.xml,data/events/celerity.json,"[21, 22]",,,manual_verified,manual,1.00,64,test
+chasing_the_bird,Chasing The Bird,data/xml/Chasing_The_Bird.xml,data/events/chasing_the_bird.json,"[83, 84]",,,manual_verified,manual,1.00,65,test
+cheryl,Cheryl,data/xml/Cheryl.xml,data/events/cheryl.json,"[57, 58]",,,manual_verified,manual,1.00,50,train
+chi_chi,Chi Chi,data/xml/Chi_Chi.xml,data/events/chi_chi.json,"[27, 28, 29]",,,manual_verified,manual,1.00,98,test
+confirmation,Confirmation,data/xml/Confirmation.xml,data/events/confirmation.json,"[0, 1, 2]",,,manual_verified,manual,1.00,97,train
+cosmic_rays,Cosmic Rays,data/xml/Cosmic_Rays.xml,data/events/cosmic_rays.json,"[29, 30]",,,manual_verified,manual,1.00,37,train
+dewey_square,Dewey Square,data/xml/Dewey_Square.xml,data/events/dewey_square.json,"[13, 14]",,,manual_verified,manual,1.00,65,train
+diverse,Diverse,data/xml/Diverse.xml,data/events/diverse.json,"[115, 116, 117]",,,manual_verified,manual,1.00,97,train
+donna_lee,Donna Lee,data/xml/Donna_Lee.xml,data/events/donna_lee.json,"[47, 48, 49]",,,manual_verified,manual,1.00,97,train
+kc_blues,K.C. Blues,data/xml/KC_Blues.xml,data/events/kc_blues.json,"[19, 20]",,,manual_verified,manual,1.00,38,train
+kim_1,Kim (No. 1),data/xml/Kim_1.xml,data/events/kim_1.json,"[50, 51, 52]",,,manual_verified,manual,1.00,98,train
+kim_2,Kim (No. 2),data/xml/Kim_2.xml,data/events/kim_2.json,"[53, 54, 55, 56]",,,manual_verified,manual,1.00,97,train
+ko_ko,Ko Ko,data/xml/Ko_Ko.xml,data/events/ko_ko.json,"[61, 62, 63, 64, 65, 66]",,,manual_verified,manual,1.00,129,train
+laird_baird,Laird Baird,data/xml/Laird_Baird.xml,data/events/laird_baird.json,"[31, 32]",,,manual_verified,manual,1.00,50,dev
+marmaduke,Marmaduke,data/xml/Marmaduke.xml,data/events/marmaduke.json,"[69, 70, 71]",,,manual_verified,manual,1.00,66,train
+mohawk_1,Mohawk (No. 1),data/xml/Mohawk_1.xml,data/events/mohawk_1.json,"[37, 38]",,,manual_verified,manual,1.00,74,train
+mohawk_2,Mohawk (No. 2),data/xml/Mohawk_2.xml,data/events/mohawk_2.json,"[39, 40]",,,manual_verified,manual,1.00,73,train
+moose_the_mooche,Moose The Mooche,data/xml/Moose_The_Mooche.xml,data/events/moose_the_mooche.json,"[3, 4]",,,manual_verified,manual,1.00,65,train
+my_little_suede_shoes,My Little Suede Shoes,data/xml/My_Little_Suede_Shoes.xml,data/events/my_little_suede_shoes.json,"[121, 122]",,,manual_verified,manual,1.00,66,train
+nows_the_time_1,Now's The Time (No. 1),data/xml/Now's_The_Time_1.xml,data/events/nows_the_time_1.json,"[75, 76]",,,manual_verified,manual,1.00,62,train
+nows_the_time_2,Now's The Time (No. 2),data/xml/Now's_The_Time_2.xml,data/events/nows_the_time_2.json,"[77, 78]",,,manual_verified,manual,1.00,50,dev
+ornithology,Ornithology,data/xml/Ornithology.xml,data/events/ornithology.json,"[5, 6]",,,manual_verified,manual,1.00,66,train
+passport,Passport,data/xml/Passport.xml,data/events/passport.json,"[103, 104]",,,manual_verified,manual,1.00,65,train
+perhaps,Perhaps,data/xml/Perhaps.xml,data/events/perhaps.json,"[73, 74]",,,manual_verified,manual,1.00,49,dev
+red_cross,Red Cross,data/xml/Red_Cross.xml,data/events/red_cross.json,"[67, 68]",,,manual_verified,manual,1.00,66,train
+relaxing_with_lee,Relaxing With Lee,data/xml/Relaxing_With_Lee.xml,data/events/relaxing_with_lee.json,"[123, 124]",,,manual_verified,manual,1.00,65,train
+scrapple_from_the_apple,Scrapple From The Apple,data/xml/Scrapple_From_The_Apple.xml,data/events/scrapple_from_the_apple.json,"[15, 16]",,,manual_verified,manual,1.00,64,test
+segment,Segment,data/xml/Segment.xml,data/events/segment.json,"[98, 99, 100]",,,manual_verified,manual,1.00,97,train
+shawnuff,Shaw'nuff,data/xml/Shawnuff.xml,data/events/shawnuff.json,"[129, 130, 131]",,,manual_verified,manual,1.00,66,train
+si_si,Si Si,data/xml/Si_Si.xml,data/events/si_si.json,"[141, 142]",,,manual_verified,manual,1.00,49,train
+steeplechase,Steeplechase,data/xml/Steeplechase.xml,data/events/steeplechase.json,"[113, 114]",,,manual_verified,manual,1.00,65,train
+the_bird,The Bird,data/xml/The_Bird.xml,data/events/the_bird.json,"[111, 112]",,,manual_verified,manual,1.00,65,train
+thriving_from_a_riff,Thriving From A Riff,data/xml/Thriving_From_A_Riff.xml,data/events/thriving_from_a_riff.json,"[59, 60]",,,manual_verified,manual,1.00,65,train
+visa,Visa,data/xml/Visa.xml,data/events/visa.json,"[101, 102]",,,manual_verified,manual,1.00,62,dev
+warming_up_a_riff,Warming Up A Riff,data/xml/Warming_Up_A_Riff.xml,data/events/warming_up_a_riff.json,"[137, 138, 139, 140]",,,manual_verified,manual,1.00,145,train
+yardbird_suite,Yardbird Suite,data/xml/Yardbird_Suite.xml,data/events/yardbird_suite.json,"[7, 8]",,,manual_verified,manual,1.00,65,dev
