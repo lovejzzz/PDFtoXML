@@ -1,12 +1,10 @@
-"""CNN encoder + Transformer decoder for OMR.
+"""CNN/ResNet encoder + Transformer decoder for OMR.
 
-Architecture:
-- Encoder: Simple CNN (not pretrained, small enough for 35 training samples)
-  that produces a grid of feature vectors from the input image.
-- Decoder: Transformer decoder that attends to the CNN features and
-  autoregressively generates the token sequence.
-
-Deliberately small to avoid catastrophic overfitting on 35 examples.
+Architecture options:
+- CNNEncoder: Simple 4-block CNN (from scratch)
+- ResNetEncoder: Pretrained ResNet-18 backbone (ImageNet features)
+Both produce a grid of feature vectors from the input image.
+- Decoder: Transformer decoder with cross-attention to encoder features.
 """
 
 import math
@@ -21,38 +19,63 @@ class CNNEncoder(nn.Module):
 
     def __init__(self, d_model: int = 256):
         super().__init__()
-        # 4 conv blocks: 512x384 → 256x192 → 128x96 → 64x48 → 32x24
         self.conv = nn.Sequential(
-            # Block 1
-            nn.Conv2d(1, 32, 3, padding=1),
-            nn.BatchNorm2d(32),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
-            # Block 2
-            nn.Conv2d(32, 64, 3, padding=1),
-            nn.BatchNorm2d(64),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
-            # Block 3
-            nn.Conv2d(64, 128, 3, padding=1),
-            nn.BatchNorm2d(128),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
-            # Block 4
-            nn.Conv2d(128, d_model, 3, padding=1),
-            nn.BatchNorm2d(d_model),
-            nn.ReLU(),
-            nn.MaxPool2d(2),
+            nn.Conv2d(1, 32, 3, padding=1), nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),
+            nn.Conv2d(32, 64, 3, padding=1), nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2),
+            nn.Conv2d(64, 128, 3, padding=1), nn.BatchNorm2d(128), nn.ReLU(), nn.MaxPool2d(2),
+            nn.Conv2d(128, d_model, 3, padding=1), nn.BatchNorm2d(d_model), nn.ReLU(), nn.MaxPool2d(2),
         )
-        # Output: (B, d_model, H/16, W/16) = (B, 256, 32, 24)
-        # Flatten spatial dims → sequence: (B, 32*24, 256) = (B, 768, 256)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """x: (B, 1, H, W) → (B, S, D)"""
-        feat = self.conv(x)  # (B, D, H', W')
+        feat = self.conv(x)
         B, D, H, W = feat.shape
-        feat = feat.permute(0, 2, 3, 1).reshape(B, H * W, D)  # (B, H'*W', D)
-        return feat
+        return feat.permute(0, 2, 3, 1).reshape(B, H * W, D)
+
+
+class ResNetEncoder(nn.Module):
+    """Pretrained ResNet-18 encoder: (B, 1, H, W) → (B, S, D).
+
+    Uses ImageNet-pretrained features. Adapts 1-channel grayscale input
+    by repeating to 3 channels. Projects ResNet features to d_model.
+    """
+
+    def __init__(self, d_model: int = 256, freeze_layers: int = 2):
+        super().__init__()
+        import torchvision.models as models
+
+        resnet = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
+
+        # Take layers up to layer3 (output stride 16)
+        self.layer0 = nn.Sequential(
+            resnet.conv1, resnet.bn1, resnet.relu, resnet.maxpool
+        )
+        self.layer1 = resnet.layer1  # /4, 64ch
+        self.layer2 = resnet.layer2  # /8, 128ch
+        self.layer3 = resnet.layer3  # /16, 256ch
+
+        # Freeze early layers for transfer learning
+        layers_to_freeze = [self.layer0, self.layer1, self.layer2, self.layer3][:freeze_layers]
+        for layer in layers_to_freeze:
+            for param in layer.parameters():
+                param.requires_grad = False
+
+        # Project to d_model if needed (layer3 outputs 256 channels)
+        resnet_out_ch = 256
+        self.proj = nn.Conv2d(resnet_out_ch, d_model, 1) if resnet_out_ch != d_model else nn.Identity()
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # Repeat grayscale to 3 channels for pretrained conv1
+        if x.shape[1] == 1:
+            x = x.repeat(1, 3, 1, 1)
+
+        x = self.layer0(x)
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        x = self.proj(x)
+
+        B, D, H, W = x.shape
+        return x.permute(0, 2, 3, 1).reshape(B, H * W, D)
 
 
 class PositionalEncoding(nn.Module):
@@ -90,13 +113,17 @@ class OMRModel(nn.Module):
         dropout: float = 0.1,
         max_seq_len: int = 1400,
         pad_idx: int = 0,
+        encoder_type: str = "cnn",
     ):
         super().__init__()
         self.d_model = d_model
         self.pad_idx = pad_idx
 
         # Encoder
-        self.encoder = CNNEncoder(d_model)
+        if encoder_type == "resnet":
+            self.encoder = ResNetEncoder(d_model, freeze_layers=2)
+        else:
+            self.encoder = CNNEncoder(d_model)
         self.enc_pos = PositionalEncoding(d_model, max_len=2000, dropout=dropout)
 
         # Decoder

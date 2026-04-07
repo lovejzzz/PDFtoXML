@@ -74,6 +74,8 @@ class ExperimentConfig:
     # Extra flags
     label_smoothing: float = 0.0
     warmup_steps: int = 0
+    encoder_type: str = "cnn"
+    use_pseudo: int = 0
 
     def to_cli_args(self) -> list[str]:
         """Convert to CLI argument strings."""
@@ -166,6 +168,72 @@ EXPERIMENT_CONFIGS = [
         name="batch_8",
         description="Larger batch size 8",
         batch_size=8, lr=2e-4, epochs=50,
+    ),
+
+    # ============================================================
+    # ROUND 2: Based on lowres + scan-augment winning baseline
+    # All use img=256x192, synthetic=1 (with scan augment)
+    # ============================================================
+
+    # --- Pretrained encoder ---
+    ExperimentConfig(
+        name="resnet_lowres",
+        description="Pretrained ResNet-18 encoder, lowres",
+        encoder_type="resnet", img_height=256, img_width=192,
+        batch_size=8, lr=1e-4, epochs=80, patience=25,
+    ),
+    ExperimentConfig(
+        name="resnet_lr5e5",
+        description="ResNet encoder, very low LR",
+        encoder_type="resnet", img_height=256, img_width=192,
+        batch_size=8, lr=5e-5, epochs=100, patience=30,
+    ),
+    ExperimentConfig(
+        name="resnet_d512",
+        description="ResNet encoder, wider decoder d=512",
+        encoder_type="resnet", d_model=512, dim_ff=1024, nhead=8,
+        img_height=256, img_width=192,
+        batch_size=4, lr=5e-5, epochs=80, patience=25,
+    ),
+
+    # --- Optimized CNN baseline ---
+    ExperimentConfig(
+        name="lowres_slow_lr",
+        description="Lowres CNN, slower LR 1e-4, 100 epochs",
+        img_height=256, img_width=192,
+        batch_size=8, lr=1e-4, epochs=100, patience=30,
+    ),
+    ExperimentConfig(
+        name="lowres_deeper_L6",
+        description="Lowres + 6 decoder layers",
+        img_height=256, img_width=192, num_layers=6,
+        batch_size=8, lr=1e-4, epochs=80, patience=25,
+    ),
+    ExperimentConfig(
+        name="lowres_label_smooth",
+        description="Lowres + label smoothing 0.1",
+        img_height=256, img_width=192, label_smoothing=0.1,
+        batch_size=8, lr=2e-4, epochs=60, patience=20,
+    ),
+    ExperimentConfig(
+        name="lowres_dropout_015",
+        description="Lowres + dropout 0.15",
+        img_height=256, img_width=192, dropout=0.15,
+        batch_size=8, lr=2e-4, epochs=60, patience=20,
+    ),
+    ExperimentConfig(
+        name="lowres_wider_d384",
+        description="Lowres + wider d=384",
+        img_height=256, img_width=192, d_model=384, dim_ff=768, nhead=6,
+        batch_size=4, lr=1e-4, epochs=60, patience=20,
+    ),
+
+    # --- Higher res with ResNet ---
+    ExperimentConfig(
+        name="resnet_384x288",
+        description="ResNet encoder, mid-res 384x288",
+        encoder_type="resnet", img_height=384, img_width=288,
+        batch_size=4, lr=5e-5, epochs=80, patience=25,
     ),
 ]
 

@@ -49,6 +49,7 @@ def train(
     use_pseudo: int = 0,
     label_smoothing: float = 0.0,
     warmup_steps: int = 0,
+    encoder_type: str = "cnn",
 ):
     """Train the OMR model."""
     # Device
@@ -104,6 +105,7 @@ def train(
         dropout=dropout,
         max_seq_len=max_seq_len,
         pad_idx=vocab.pad_idx,
+        encoder_type=encoder_type,
     ).to(device)
 
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
