@@ -227,18 +227,34 @@ def train_primus(
     )
     model.load_state_dict(ckpt["model_state_dict"])
 
-    # Omnibook dataset
-    omni_train = OMRDataset(
-        "train", vocab,
-        img_height=omni_height, img_width=omni_width,
-        max_seq_len=omni_seq_len, augment=True,
-        use_synthetic=True,
-    )
-    omni_dev = OMRDataset(
-        "dev", vocab,
-        img_height=omni_height, img_width=omni_width,
-        max_seq_len=omni_seq_len, augment=False,
-    )
+    # Use staff crops if available, otherwise full pages
+    from src.experiments.staff_dataset import StaffCropDataset
+    staff_manifest = os.path.join(PROJECT_ROOT, "data", "staff_crops", "manifest.json")
+    if os.path.exists(staff_manifest):
+        print("  Using staff-level crops (aligned with PrIMuS format)")
+        omni_train = StaffCropDataset(
+            "train", vocab,
+            img_height=primus_height, img_width=primus_width,
+            max_seq_len=primus_seq_len, augment=True,
+        )
+        omni_dev = StaffCropDataset(
+            "dev", vocab,
+            img_height=primus_height, img_width=primus_width,
+            max_seq_len=primus_seq_len, augment=False,
+        )
+    else:
+        print("  No staff crops found, using full pages")
+        omni_train = OMRDataset(
+            "train", vocab,
+            img_height=omni_height, img_width=omni_width,
+            max_seq_len=omni_seq_len, augment=True,
+            use_synthetic=True,
+        )
+        omni_dev = OMRDataset(
+            "dev", vocab,
+            img_height=omni_height, img_width=omni_width,
+            max_seq_len=omni_seq_len, augment=False,
+        )
     print(f"  Omnibook train: {len(omni_train)}, dev: {len(omni_dev)}")
 
     omni_train_loader = DataLoader(
