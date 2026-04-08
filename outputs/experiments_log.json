@@ -395,6 +395,41 @@
         "label_smoothing": 0.0,
         "warmup_steps": 0
       }
+    },
+    {
+      "name": "highres_768x576",
+      "description": "Higher resolution input images",
+      "score": 0.1449,
+      "event_f1": 0.0,
+      "pitch_acc": 0.0,
+      "rhythm_acc": 0.0,
+      "improvement": -0.0761,
+      "status": "discard",
+      "elapsed_seconds": 3259,
+      "best_before": 0.221,
+      "returncode": 0,
+      "config": {
+        "name": "highres_768x576",
+        "description": "Higher resolution input images",
+        "epochs": 40,
+        "batch_size": 2,
+        "lr": 8e-05,
+        "d_model": 256,
+        "nhead": 4,
+        "num_layers": 4,
+        "dim_ff": 512,
+        "dropout": 0.1,
+        "img_height": 768,
+        "img_width": 576,
+        "max_seq_len": 1400,
+        "eval_every": 5,
+        "patience": 20,
+        "use_synthetic": 1,
+        "label_smoothing": 0.0,
+        "warmup_steps": 0,
+        "encoder_type": "cnn",
+        "use_pseudo": 0
+      }
     }
   ]
 }
