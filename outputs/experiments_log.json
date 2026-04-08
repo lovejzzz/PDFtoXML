@@ -430,6 +430,13 @@
         "encoder_type": "cnn",
         "use_pseudo": 0
       }
+    },
+    {
+      "name": "lr_5e5",
+      "description": "Lower learning rate 5e-5",
+      "score": 0.0,
+      "status": "crash",
+      "elapsed_seconds": 3600
     }
   ]
 }
