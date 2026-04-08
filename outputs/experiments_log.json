@@ -444,6 +444,13 @@
       "score": 0.0,
       "status": "crash",
       "elapsed_seconds": 3600
+    },
+    {
+      "name": "resnet_lowres",
+      "description": "Pretrained ResNet-18 encoder, lowres",
+      "score": 0.0,
+      "status": "crash",
+      "elapsed_seconds": 3600
     }
   ]
 }
