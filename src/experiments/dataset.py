@@ -219,7 +219,7 @@ class OMRDataset(Dataset):
 
         if self.augment:
             # Use scan-like augmentation for synthetic images to bridge domain gap
-            if sample.get("provenance") == "synthetic" and random.random() < 0.7:
+            if sample.get("provenance") == "synthetic" and random.random() < 0.85:
                 from src.experiments.scan_augment import scan_augment
                 img = scan_augment(img)
             else:
