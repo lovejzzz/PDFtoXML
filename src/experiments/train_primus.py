@@ -338,10 +338,10 @@ def train_primus(
     print(f"\n  Fine-tuning done. Best dev loss: {best_dev_loss:.4f} at epoch {best_epoch}")
 
     # ============================================================
-    # STAGE 3: Evaluate
+    # STAGE 3: Evaluate (staff-level → assemble per tune)
     # ============================================================
     print(f"\n{'='*60}")
-    print("STAGE 3: Evaluation")
+    print("STAGE 3: Evaluation (staff assembly)")
     print(f"{'='*60}")
 
     ckpt = torch.load(
@@ -351,22 +351,48 @@ def train_primus(
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()
 
-    predictions = {}
+    # Predict each staff crop, group by tune
+    tune_predictions: dict[str, list[list[str]]] = {}
+
     for i, sample in enumerate(omni_dev.samples):
         img_tensor = omni_dev[i][0].unsqueeze(0).to(device)
+        max_len = primus_seq_len if hasattr(omni_dev, 'max_seq_len') else omni_seq_len
         token_ids = model.generate(
             img_tensor,
             sos_idx=vocab.sos_idx,
             eos_idx=vocab.eos_idx,
-            max_len=omni_seq_len,
+            max_len=max_len,
         )[0]
         token_strs = vocab.decode(token_ids)
-        predictions[sample["file_id"]] = token_strs
 
-    save_predictions(predictions, PRED_DIR)
+        # Group by tune (staff samples have file_id like "tune_name")
+        file_id = sample.get("file_id", "")
+        if file_id not in tune_predictions:
+            tune_predictions[file_id] = []
+        tune_predictions[file_id].append(token_strs)
+
+    # Assemble: concatenate staff predictions per tune
+    # Remove duplicate header tokens (CLEF, KEY, TIME) from non-first staves
+    assembled = {}
+    header_prefixes = ("CLEF_", "KEY_", "TIME_")
+
+    for file_id, staff_lists in tune_predictions.items():
+        combined = []
+        for si, staff_tokens in enumerate(staff_lists):
+            if si == 0:
+                combined.extend(staff_tokens)
+            else:
+                # Skip header tokens from subsequent staves
+                for tok in staff_tokens:
+                    if not tok.startswith(header_prefixes):
+                        combined.append(tok)
+        assembled[file_id] = combined
+
+    save_predictions(assembled, PRED_DIR)
+    print(f"  Assembled {len(assembled)} tunes from staff predictions")
 
     import subprocess
-    commit_hash = "primus_pretrained"
+    commit_hash = "primus_staff"
     try:
         result = subprocess.run(
             ["git", "rev-parse", "--short", "HEAD"],
@@ -381,7 +407,7 @@ def train_primus(
         pred_dir=PRED_DIR,
         gold_dir=EVENTS_DIR,
         commit=commit_hash,
-        description=f"PrIMuS pretrain {pretrain_samples}→FT d={d_model} L={num_layers} ep={best_epoch}",
+        description=f"PrIMuS {pretrain_samples} staff-assembly d={d_model} L={num_layers} ep={best_epoch}",
     )
 
 
