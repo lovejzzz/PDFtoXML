@@ -437,6 +437,13 @@
       "score": 0.0,
       "status": "crash",
       "elapsed_seconds": 3600
+    },
+    {
+      "name": "synth_heavy_augment",
+      "description": "Synthetic + strong online augmentation",
+      "score": 0.0,
+      "status": "crash",
+      "elapsed_seconds": 3600
     }
   ]
 }
