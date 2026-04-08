@@ -168,7 +168,8 @@ def _page_edge_shadow(img: Image.Image) -> Image.Image:
 
     # Pick an edge
     edge = random.choice(["left", "right", "top"])
-    shadow_width = random.randint(w // 20, w // 8)
+    shadow_width = random.randint(max(1, w // 20), max(2, w // 8))
+    shadow_width = min(shadow_width, w - 1, h - 1)  # clamp to image size
     darkness = random.uniform(0.5, 0.8)
 
     if edge == "left":

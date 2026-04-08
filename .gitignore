@@ -9,3 +9,6 @@ data/tune_page_map.json
 checkpoints/
 outputs/predictions/
 data/synthetic/
+external/
+data/pages/*.musicxml
+outputs/homr_predictions/

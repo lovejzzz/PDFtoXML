@@ -19,3 +19,4 @@ a1b1dc0	0.2210	0.0181	0.2476	0.2476	0.0279	1.0000	keep	CNN-Transformer baseline 
 32a34a4	0.1537	0.0176	0.0946	0.0946	0.0390	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=10
 32a34a4	0.1761	0.0103	0.1464	0.1464	0.0478	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=15
 32a34a4	0.1711	0.0156	0.1416	0.1416	0.0179	1.0000	keep	CNN-Transformer baseline d=256 L=4 ep=10
+56e1b8772b	0.1481	0.0115	0.0772	0.0772	0.0663	1.0000	keep	PrIMuS pretrain 20000→FT d=256 L=4 ep=5
