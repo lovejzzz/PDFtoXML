@@ -28,7 +28,7 @@ CROP_PAD = 20
 
 
 def _detect_staffs(image_path: str):
-    """Use homr to detect staff positions in an image."""
+    """Use homr to detect staff positions and bar line counts in an image."""
     from homr.main import detect_staffs_in_image, ProcessingConfig
     config = ProcessingConfig(False, False, False, False, None)
     multi_staffs, image, debug, title = detect_staffs_in_image(image_path, config)
@@ -40,19 +40,33 @@ def _detect_staffs(image_path: str):
         y2 = min(image.shape[0], int(staff.max_y) + CROP_PAD)
         x1 = max(0, int(staff.min_x) - CROP_PAD)
         x2 = min(image.shape[1], int(staff.max_x) + CROP_PAD)
+        # Get bar lines on this staff (estimate measure count)
+        try:
+            bar_lines = staff.get_bar_lines()
+            n_bars = len(bar_lines) if bar_lines is not None else 0
+        except Exception:
+            n_bars = 0
+        # Number of measures = bar lines (approximately)
+        # Each staff has at least 1 measure
+        n_measures = max(1, n_bars)
         staffs.append({
             "y1": y1, "y2": y2, "x1": x1, "x2": x2,
             "crop": image[y1:y2, x1:x2],
+            "n_measures": n_measures,
         })
 
     return staffs, image
 
 
-def _split_tokens_by_staff(tokens: list[str], n_staffs: int) -> list[list[str]]:
-    """Split a full token sequence across N staves by measure boundaries.
+def _split_tokens_by_staff(
+    tokens: list[str],
+    n_staffs: int,
+    measures_per_staff_list: list[int] | None = None,
+) -> list[list[str]]:
+    """Split a full token sequence across N staves using per-staff measure counts.
 
-    Assumes measures are roughly evenly distributed across staves
-    (reasonable for lead sheets with consistent system breaks).
+    If measures_per_staff_list is provided (from homr bar line detection),
+    use it to allocate measures more accurately. Otherwise, split evenly.
     """
     # Find measure boundaries
     measure_starts = []
@@ -64,21 +78,52 @@ def _split_tokens_by_staff(tokens: list[str], n_staffs: int) -> list[list[str]]:
     if n_measures == 0 or n_staffs <= 0:
         return [tokens]
 
-    # Split measures evenly across staves
-    measures_per_staff = max(1, math.ceil(n_measures / n_staffs))
-    staff_tokens = []
-
     # Extract header tokens (before first measure)
     header = tokens[:measure_starts[0]] if measure_starts[0] > 0 else []
 
+    # Compute per-staff measure allocation
+    if measures_per_staff_list and len(measures_per_staff_list) == n_staffs:
+        # Scale to match total measures
+        total_detected = sum(measures_per_staff_list)
+        if total_detected > 0:
+            scale = n_measures / total_detected
+            scaled = [max(1, int(round(m * scale))) for m in measures_per_staff_list]
+            # Adjust for rounding errors
+            diff = n_measures - sum(scaled)
+            if diff != 0 and len(scaled) > 0:
+                # Distribute correction across staves
+                idx = 0
+                while diff > 0:
+                    scaled[idx % len(scaled)] += 1
+                    diff -= 1
+                    idx += 1
+                while diff < 0 and any(s > 1 for s in scaled):
+                    if scaled[idx % len(scaled)] > 1:
+                        scaled[idx % len(scaled)] -= 1
+                        diff += 1
+                    idx += 1
+            measures_per_staff = scaled
+        else:
+            measures_per_staff = [max(1, n_measures // n_staffs)] * n_staffs
+    else:
+        # Even split
+        per = max(1, math.ceil(n_measures / n_staffs))
+        measures_per_staff = [per] * n_staffs
+
+    # Build per-staff token lists
+    staff_tokens = []
+    cur_measure = 0
     for s in range(n_staffs):
-        start_measure = s * measures_per_staff
-        end_measure = min((s + 1) * measures_per_staff, n_measures)
+        n_for_this = measures_per_staff[s]
+        start_measure = cur_measure
+        end_measure = min(cur_measure + n_for_this, n_measures)
+        cur_measure = end_measure
 
         if start_measure >= n_measures:
-            break
+            # No more measures - give an empty staff (just header)
+            staff_tokens.append(list(header))
+            continue
 
-        # Get token range for these measures
         tok_start = measure_starts[start_measure]
         if end_measure < n_measures:
             tok_end = measure_starts[end_measure]
@@ -136,9 +181,12 @@ def extract_all_staffs():
             print(f"  {file_id}: no staffs detected")
             continue
 
-        # Split tokens across all staves
+        # Split tokens across all staves using per-staff measure counts
         n_staffs = len(all_page_staffs)
-        staff_token_lists = _split_tokens_by_staff(full_tokens, n_staffs)
+        measures_per_staff = [s.get("n_measures", 1) for s in all_page_staffs]
+        staff_token_lists = _split_tokens_by_staff(
+            full_tokens, n_staffs, measures_per_staff
+        )
 
         # Save crops and tokens
         for i, staff_info in enumerate(all_page_staffs):
