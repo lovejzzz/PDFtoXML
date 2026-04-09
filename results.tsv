@@ -32,3 +32,4 @@ c9159c1b87	0.3987	0.0410	0.4735	0.4735	0.4890	1.0000	keep	V4: lower LR, more fre
 87e585fef7	0.4026	0.0703	0.4314	0.4314	0.5826	1.0000	keep	V5: very low LR continuation
 a8afd78a2a	0.4053	0.0443	0.4782	0.4782	0.5124	1.0000	keep	TTA n=3 ckpt=primus_finetuned_v2.pt
 a8afd78a2a	0.4075	0.0732	0.4595	0.4595	0.5253	1.0000	keep	TTA n=5 ckpt=primus_finetuned_v2.pt
+16aca78c25	0.4055	0.0407	0.4793	0.4793	0.5174	1.0000	keep	TTA n=5 ckpt=primus_finetuned_v4.pt
