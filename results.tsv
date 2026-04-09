@@ -30,3 +30,5 @@ c9159c1b87	0.3936	0.0482	0.4461	0.4461	0.5227	1.0000	keep	V3: longer FT from v2 
 c9159c1b87	0.3987	0.0410	0.4735	0.4735	0.4890	1.0000	keep	V4: lower LR, more frequent eval, from 0.4053 best
 87e585fef7	0.4047	0.0589	0.4460	0.4460	0.5756	1.0000	keep	PrIMuS 87000 staff-assembly d=256 L=4 ep=75
 87e585fef7	0.4026	0.0703	0.4314	0.4314	0.5826	1.0000	keep	V5: very low LR continuation
+a8afd78a2a	0.4053	0.0443	0.4782	0.4782	0.5124	1.0000	keep	TTA n=3 ckpt=primus_finetuned_v2.pt
+a8afd78a2a	0.4075	0.0732	0.4595	0.4595	0.5253	1.0000	keep	TTA n=5 ckpt=primus_finetuned_v2.pt
