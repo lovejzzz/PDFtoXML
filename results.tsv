@@ -23,3 +23,6 @@ a1b1dc0	0.2210	0.0181	0.2476	0.2476	0.0279	1.0000	keep	CNN-Transformer baseline 
 29358661f5	0.2344	0.0107	0.0631	0.0631	0.6857	1.0000	keep	PrIMuS pretrain 20000→FT d=256 L=4 ep=35
 cc1cc6a946	0.4053	0.0557	0.4399	0.4399	0.6044	1.0000	keep	PrIMuS 87000 staff-assembly d=256 L=4 ep=35
 9c204f481c	0.2453	0.0326	0.2574	0.2574	0.1312	1.0000	keep	PrIMuS pretrained ONLY (no FT) primus_pretrained.pt
+5a1c064dcb	0.4113	0.0720	0.4548	0.4548	0.5671	1.0000	keep	Continue FT from 0.4053 with bar-line aligned labels
+5a1c064dcb	0.3908	0.0693	0.3962	0.3962	0.6118	1.0000	keep	Beam search beam=5 ckpt=primus_finetuned_v2.pt
+5a1c064dcb	0.3986	0.0639	0.4077	0.4077	0.6398	1.0000	keep	Beam search beam=3 ckpt=primus_finetuned_v2.pt

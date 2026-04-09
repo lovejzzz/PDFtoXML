@@ -189,6 +189,78 @@ class OMRModel(nn.Module):
         return logits
 
     @torch.no_grad()
+    def generate_beam(
+        self,
+        image: torch.Tensor,
+        sos_idx: int,
+        eos_idx: int,
+        beam_size: int = 5,
+        max_len: int = 600,
+        length_penalty: float = 0.7,
+    ) -> list[int]:
+        """Beam search generation for a single image (B=1).
+
+        Returns the best beam's token ids (not including SOS, may include EOS).
+        """
+        self.eval()
+        device = image.device
+        assert image.size(0) == 1, "Beam search only supports batch size 1"
+
+        enc_out = self.encoder(image)
+        enc_out = self.enc_pos(enc_out)
+
+        # Each beam: (sequence, log_prob, finished)
+        beams = [([sos_idx], 0.0, False)]
+
+        for _ in range(max_len - 1):
+            new_beams = []
+            for seq, score, finished in beams:
+                if finished:
+                    new_beams.append((seq, score, True))
+                    continue
+
+                tgt = torch.tensor([seq], dtype=torch.long, device=device)
+                tgt_emb = self.token_embed(tgt) * math.sqrt(self.d_model)
+                tgt_emb = self.dec_pos(tgt_emb)
+
+                T = tgt.size(1)
+                causal_mask = self._make_causal_mask(T, device)
+
+                dec_out = self.decoder(
+                    tgt=tgt_emb,
+                    memory=enc_out,
+                    tgt_mask=causal_mask,
+                )
+                logits = self.output_proj(dec_out[:, -1, :])  # (1, vocab)
+                log_probs = torch.log_softmax(logits, dim=-1)[0]  # (vocab,)
+
+                top_log_probs, top_indices = log_probs.topk(beam_size)
+
+                for lp, idx in zip(top_log_probs.tolist(), top_indices.tolist()):
+                    new_seq = seq + [idx]
+                    new_score = score + lp
+                    is_done = idx == eos_idx
+                    new_beams.append((new_seq, new_score, is_done))
+
+            # Sort by length-normalized score, keep top-K
+            def beam_score(b):
+                seq, sc, _ = b
+                length = max(1, len(seq) - 1)
+                return sc / (length ** length_penalty)
+
+            new_beams.sort(key=beam_score, reverse=True)
+            beams = new_beams[:beam_size]
+
+            if all(b[2] for b in beams):
+                break
+
+        # Return best beam (excluding SOS, truncated at EOS)
+        best_seq = beams[0][0][1:]  # remove SOS
+        if eos_idx in best_seq:
+            best_seq = best_seq[: best_seq.index(eos_idx)]
+        return best_seq
+
+    @torch.no_grad()
     def generate(
         self,
         images: torch.Tensor,
