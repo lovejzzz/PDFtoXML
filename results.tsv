@@ -46,3 +46,4 @@ f36b3478c5	0.4120	0.0639	0.4667	0.4667	0.5523	1.0000	keep	V11: v9 with batch=32 
 c01eca5aa3	0.4115	0.0533	0.4714	0.4714	0.5560	1.0000	keep	V12: dropout 0.2 from V9
 c01eca5aa3	0.3899	0.0415	0.4568	0.4568	0.4795	1.0000	keep	V13: weight_decay 0.1 from V9
 c01eca5aa3	0.4083	0.0487	0.4850	0.4850	0.5028	1.0000	keep	TTA n=7 ckpt=primus_finetuned_v9.pt
+synth_eval	0.1857	0.0000	0.0000	0.0000	0.5714	1.0000	keep	Model on clean synthetic renders (no scan noise)

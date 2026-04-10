@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "title": "laird_baird",
+    "key_fifths": 0,
+    "clef": "G",
+    "divisions": 1,
+    "canonical_divisions": 48,
+    "time_beats": 4,
+    "time_beat_type": 4
+  },
+  "measures": [
+    {
+      "measure_number": 1,
+      "events": [
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "whole",
+          "duration_divisions": 192,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    }
+  ]
+}
