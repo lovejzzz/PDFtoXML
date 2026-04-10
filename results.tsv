@@ -35,3 +35,4 @@ a8afd78a2a	0.4075	0.0732	0.4595	0.4595	0.5253	1.0000	keep	TTA n=5 ckpt=primus_fi
 16aca78c25	0.4055	0.0407	0.4793	0.4793	0.5174	1.0000	keep	TTA n=5 ckpt=primus_finetuned_v4.pt
 52c07c4bde	0.4108	0.0522	0.4551	0.4551	0.6024	1.0000	keep	V6: bigger batch, higher LR
 5cd8156e9a	0.3959	0.0539	0.4388	0.4388	0.5484	1.0000	keep	V7: label smoothing 0.1
+3d676971ab	0.4117	0.0462	0.4849	0.4849	0.5310	1.0000	keep	V8: continue from v4 (high pitch) with tiny LR
