@@ -40,6 +40,7 @@ def main(
     pretrained_ckpt: str = "primus_pretrained.pt",
     output_ckpt: str = "primus_finetuned_v2.pt",
     desc: str = "FT-only",
+    label_smoothing: float = 0.0,
 ):
     if torch.backends.mps.is_available():
         device = torch.device("mps")
@@ -93,7 +94,10 @@ def main(
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
-    criterion = nn.CrossEntropyLoss(ignore_index=vocab.pad_idx)
+    criterion = nn.CrossEntropyLoss(
+        ignore_index=vocab.pad_idx,
+        label_smoothing=label_smoothing,
+    )
 
     best_dev = float("inf")
     best_epoch = 0
