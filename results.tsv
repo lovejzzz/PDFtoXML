@@ -38,3 +38,4 @@ a8afd78a2a	0.4075	0.0732	0.4595	0.4595	0.5253	1.0000	keep	TTA n=5 ckpt=primus_fi
 3d676971ab	0.4117	0.0462	0.4849	0.4849	0.5310	1.0000	keep	V8: continue from v4 (high pitch) with tiny LR
 fc413eb5b7	0.4123	0.0484	0.4839	0.4839	0.5333	1.0000	keep	TTA n=5 ckpt=primus_finetuned_v8.pt
 8376ce58e9	0.4153	0.0565	0.4778	0.4778	0.5557	1.0000	keep	V9: continue from v8 with 5e-6 LR
+413064535d	0.4146	0.0529	0.4783	0.4783	0.5564	1.0000	keep	V10: continue from v9 with 3e-6 LR
