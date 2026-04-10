@@ -41,3 +41,5 @@ fc413eb5b7	0.4123	0.0484	0.4839	0.4839	0.5333	1.0000	keep	TTA n=5 ckpt=primus_fi
 413064535d	0.4146	0.0529	0.4783	0.4783	0.5564	1.0000	keep	V10: continue from v9 with 3e-6 LR
 643411c0fa	0.4085	0.0463	0.4788	0.4788	0.5278	1.0000	keep	TTA n=5 ckpt=primus_finetuned_v9.pt
 f36b3478c5	0.4120	0.0639	0.4667	0.4667	0.5523	1.0000	keep	V11: v9 with batch=32 lr=2e-5
+70e5117a7d	0.4035	0.0603	0.4246	0.4246	0.6285	1.0000	keep	Cleaned labels (654 staves, sim>0.15)
+70e5117a7d	0.3906	0.0455	0.4321	0.4321	0.5504	1.0000	keep	Cleaned labels strict (354 staves, sim>0.4)

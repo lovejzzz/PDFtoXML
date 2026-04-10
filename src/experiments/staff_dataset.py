@@ -41,7 +41,9 @@ class StaffCropDataset(Dataset):
         self.max_seq_len = max_seq_len
         self.augment = augment
 
-        manifest_path = os.path.join(CROPS_DIR, "manifest.json")
+        # Use cleaned manifest if available, otherwise original
+        cleaned_path = os.path.join(CROPS_DIR, "manifest_cleaned.json")
+        manifest_path = cleaned_path if os.path.exists(cleaned_path) else os.path.join(CROPS_DIR, "manifest.json")
         if not os.path.exists(manifest_path):
             self.samples = []
             return
