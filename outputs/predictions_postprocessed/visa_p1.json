@@ -1,0 +1,773 @@
+{
+  "meta": {
+    "title": "visa_p1",
+    "key_fifths": 0,
+    "clef": "G",
+    "divisions": 1,
+    "canonical_divisions": 48,
+    "time_beats": 4,
+    "time_beat_type": 4
+  },
+  "measures": [
+    {
+      "measure_number": 1,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "half",
+          "duration_divisions": 96,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "quarter",
+          "duration_divisions": 48,
+          "offset_divisions": 96,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 144,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 168,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 2,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 3,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "note",
+          "pitch": "G4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 4,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 5,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 6,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 7,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 8,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 96,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 120,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 144,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 168,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 9,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 96,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 120,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 144,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 168,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 10,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 96,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 120,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 144,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 168,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 11,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 96,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 120,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 144,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 168,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    },
+    {
+      "measure_number": 12,
+      "events": [
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 0,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 24,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 48,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 72,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 96,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 120,
+          "voice": 1,
+          "dots": 0
+        },
+        {
+          "type": "note",
+          "pitch": "F4",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 144,
+          "voice": 1,
+          "dots": 0,
+          "tie_start": false,
+          "tie_stop": false,
+          "accidental": "",
+          "tuplet_actual": 0,
+          "tuplet_normal": 0
+        },
+        {
+          "type": "rest",
+          "duration_name": "eighth",
+          "duration_divisions": 24,
+          "offset_divisions": 168,
+          "voice": 1,
+          "dots": 0
+        }
+      ],
+      "time_beats": 4,
+      "time_beat_type": 4
+    }
+  ]
+}

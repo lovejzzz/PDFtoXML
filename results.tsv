@@ -48,3 +48,6 @@ c01eca5aa3	0.3899	0.0415	0.4568	0.4568	0.4795	1.0000	keep	V13: weight_decay 0.1 
 c01eca5aa3	0.4083	0.0487	0.4850	0.4850	0.5028	1.0000	keep	TTA n=7 ckpt=primus_finetuned_v9.pt
 synth_eval	0.1857	0.0000	0.0000	0.0000	0.5714	1.0000	keep	Model on clean synthetic renders (no scan noise)
 c643fd6213	0.4280	0.0621	0.4693	0.4693	0.6545	1.0000	keep	PrIMuS 87000 staff-assembly d=256 L=6 ep=50
+postproc	0.4121	0.0502	0.4397	0.4397	0.6613	1.0000	keep	Post-processed predictions from outputs/predictions
+6L_raw	0.4280	0.0621	0.4693	0.4693	0.6545	1.0000	keep	6L model raw
+6L_pp	0.4121	0.0502	0.4397	0.4397	0.6613	1.0000	keep	6L model + post-processing
