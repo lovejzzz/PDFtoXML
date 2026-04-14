@@ -52,3 +52,4 @@ postproc	0.4121	0.0502	0.4397	0.4397	0.6613	1.0000	keep	Post-processed predictio
 6L_raw	0.4280	0.0621	0.4693	0.4693	0.6545	1.0000	keep	6L model raw
 6L_pp	0.4121	0.0502	0.4397	0.4397	0.6613	1.0000	keep	6L model + post-processing
 c7d07af4d5	0.4238	0.0538	0.4498	0.4498	0.7018	1.0000	keep	PrIMuS 87000 staff-assembly d=384 L=8 ep=20
+28a4dae3b9	0.4292	0.0570	0.4711	0.4711	0.6676	1.0000	keep	PrIMuS 0 staff-assembly d=384 L=8 ep=60
